@@ -21,22 +21,24 @@ class PlayerLoading extends PlayerState {
 
 class PlayerPlaying extends PlayerState {
   final RadioStationModel station;
-  final int sessionId; // 👈 nuevo
+  final double volume;
+  final int sessionId;
 
-  const PlayerPlaying(this.station, this.sessionId);
+  const PlayerPlaying(this.station, this.volume, this.sessionId);
 
   @override
-  List<Object?> get props => [station, sessionId];
+  List<Object?> get props => [station, volume, sessionId];
 }
 
 class PlayerPaused extends PlayerState {
   final RadioStationModel station;
-  final int sessionId; // 👈 nuevo
+  final double volume;
+  final int sessionId;
 
-  const PlayerPaused(this.station, this.sessionId);
+  const PlayerPaused(this.station, this.volume, this.sessionId);
 
   @override
-  List<Object?> get props => [station, sessionId];
+  List<Object?> get props => [station, volume, sessionId];
 }
 
 class PlayerError extends PlayerState {
