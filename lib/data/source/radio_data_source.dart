@@ -10,7 +10,7 @@ class RadioRemoteDataSource {
   Future<List<RadioStationModel>> getStations() async {
     final response = await client.get(
       Uri.parse(
-          'https://de1.api.radio-browser.info/json/stations?hidebroken=true&order=clickcount&reverse=true'),
+          'https://de1.api.radio-browser.info/json/stations?hidebroken=true&codec=MP3&order=clickcount&reverse=true'),
     );
 
     if (response.statusCode == 200) {
@@ -20,7 +20,8 @@ class RadioRemoteDataSource {
           .where((json) =>
               json['url_resolved'] != null &&
               json['url_resolved'].toString().isNotEmpty &&
-              (json['bitrate'] ?? 0) > 0)
+              (json['bitrate'] ?? 0) > 0 &&
+              (json['clickcount'] ?? 0) > 1000)
           .map((json) => RadioStationModel.fromJson(json))
           .toList();
 

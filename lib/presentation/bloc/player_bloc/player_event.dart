@@ -18,3 +18,12 @@ class PlayStationEvent extends PlayerEvent {
 }
 
 class PauseStationEvent extends PlayerEvent {}
+
+class SetVolumeEvent extends PlayerEvent {
+  final double volume;
+
+  const SetVolumeEvent(this.volume);
+
+  @override
+  List<Object?> get props => [volume];
+}

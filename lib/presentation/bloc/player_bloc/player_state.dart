@@ -27,3 +27,22 @@ class PlayerPaused extends PlayerState {
   @override
   List<Object?> get props => [station];
 }
+
+class PlayerError extends PlayerState {
+  final RadioStationModel station;
+  final String message;
+
+  const PlayerError(this.station, this.message);
+
+  @override
+  List<Object?> get props => [station, message];
+}
+
+class PlayerLoading extends PlayerState {
+  final RadioStationModel station;
+
+  const PlayerLoading(this.station);
+
+  @override
+  List<Object?> get props => [station];
+}
