@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:radio_lab_app/data/models/radio_station_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:radio_lab_app/presentation/bloc/player_bloc/player_bloc.dart';
+import 'package:radio_lab_app/presentation/bloc/player_bloc/player_event.dart';
 import 'package:radio_lab_app/presentation/bloc/radio_list_bloc/radio_list_bloc.dart';
 
 class RadioHomePage extends StatelessWidget {
@@ -32,9 +34,7 @@ class RadioHomePage extends StatelessWidget {
                   title: Text(station.name),
                   subtitle: Text('${station.country} • ${station.tags}'),
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Seleccionaste: ${station.name}')),
-                    );
+                    context.read<PlayerBloc>().add(PlayStationEvent(station));
                   },
                 );
               },
