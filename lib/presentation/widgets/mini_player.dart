@@ -17,7 +17,10 @@ class _MiniPlayerState extends State<MiniPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlayerBloc, PlayerState>(
+    return BlocConsumer<PlayerBloc, PlayerState>(
+      listener: (_, __) {},
+      listenWhen: (_, __) => false,
+      buildWhen: (_, __) => true,
       builder: (context, state) {
         if (state is PlayerLoading) {
           return _baseBar('Cargando...');

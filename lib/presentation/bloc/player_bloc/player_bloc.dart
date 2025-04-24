@@ -4,6 +4,7 @@ import 'player_event.dart';
 import 'player_state.dart';
 
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
+  int _sessionId = 0;
   final audio.AudioPlayer _audioPlayer = audio.AudioPlayer();
 
   PlayerBloc() : super(PlayerInitial()) {
@@ -12,19 +13,25 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     on<PauseStationEvent>(_onPause);
     on<SetVolumeEvent>(_onSetVolume);
   }
+
   Future<void> _onPlay(
       PlayStationEvent event, Emitter<PlayerState> emit) async {
-    emit(PlayerLoading(event.station));
-
     try {
-      final future = _audioPlayer.setUrl(event.station.url);
-      await future.timeout(const Duration(seconds: 5), onTimeout: () {
-        throw Exception("Timeout en setUrl");
-      });
+      if (state is PlayerPaused &&
+          (state as PlayerPaused).station.url == event.station.url) {
+        await _audioPlayer.play();
+        emit(PlayerPlaying(
+            event.station, DateTime.now().millisecondsSinceEpoch));
+        return;
+      }
 
+      emit(PlayerLoading(event.station));
+      await _audioPlayer
+          .setUrl(event.station.url)
+          .timeout(const Duration(seconds: 5));
       await _audioPlayer.play();
-      emit(PlayerPlaying(event.station));
-    } catch (e) {
+      emit(PlayerPlaying(event.station, DateTime.now().millisecondsSinceEpoch));
+    } catch (_) {
       emit(PlayerError(event.station, 'No se pudo reproducir esta estación'));
     }
   }
@@ -33,7 +40,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
       PauseStationEvent event, Emitter<PlayerState> emit) async {
     await _audioPlayer.pause();
     if (state is PlayerPlaying) {
-      emit(PlayerPaused((state as PlayerPlaying).station));
+      emit(PlayerPaused((state as PlayerPlaying).station, _sessionId));
     }
   }
 
