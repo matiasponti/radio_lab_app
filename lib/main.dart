@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radio_lab_app/presentation/bloc/player_bloc/player_bloc.dart';
+import 'package:radio_lab_app/presentation/theme/app_theme.dart';
 import 'injection_container.dart';
 import 'presentation/bloc/radio_list_bloc/radio_list_bloc.dart';
 import 'presentation/pages/radio_home_page.dart';
@@ -25,7 +26,7 @@ class RadioLabApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Radio Lab App',
-        theme: ThemeData.dark(),
+        theme: AppTheme.darkTheme,
         home: const RadioHomePage(),
       ),
     );

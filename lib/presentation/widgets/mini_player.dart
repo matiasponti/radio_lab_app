@@ -38,8 +38,19 @@ class MiniPlayer extends StatelessWidget {
     if (isError) return _baseBar('Error al reproducir');
 
     return Container(
-      color: Colors.black87,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 8,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -50,14 +61,17 @@ class MiniPlayer extends StatelessWidget {
               Expanded(
                 child: Text(
                   station.name,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              PlayPauseButton(
-                  station: station), // Widget separado para mejor rendimiento
+              PlayPauseButton(station: station),
             ],
           ),
+          const SizedBox(height: 4),
           Slider(
             value: volume,
             min: 0.0,

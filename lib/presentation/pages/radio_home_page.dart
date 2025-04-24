@@ -28,22 +28,43 @@ class RadioHomePage extends StatelessWidget {
                     itemCount: state.stations.length,
                     itemBuilder: (context, index) {
                       final RadioStationModel station = state.stations[index];
-                      return ListTile(
-                        leading: station.favicon.isNotEmpty
-                            ? Image.network(
-                                station.favicon,
-                                width: 40,
-                                errorBuilder: (_, __, ___) =>
-                                    const Icon(Icons.radio),
-                              )
-                            : const Icon(Icons.radio),
-                        title: Text(station.name),
-                        subtitle: Text('${station.country} • ${station.tags}'),
-                        onTap: () {
-                          context
-                              .read<PlayerBloc>()
-                              .add(PlayStationEvent(station));
-                        },
+                      return Card(
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
+                          leading: station.favicon.isNotEmpty
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    station.favicon,
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, __, ___) =>
+                                        const Icon(Icons.radio),
+                                  ),
+                                )
+                              : const Icon(Icons.radio,
+                                  size: 36, color: Colors.white),
+                          title: Text(
+                            station.name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          subtitle: Text(
+                            '${station.country} • ${station.tags}',
+                            style: const TextStyle(color: Colors.white70),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          onTap: () {
+                            context
+                                .read<PlayerBloc>()
+                                .add(PlayStationEvent(station));
+                          },
+                        ),
                       );
                     },
                   );
