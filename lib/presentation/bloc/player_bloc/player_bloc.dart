@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart' as audio;
+import 'package:radio_lab_app/utils/crypto_helper.dart';
 import 'player_event.dart';
 import 'player_state.dart';
 
@@ -28,7 +29,9 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
 
       emit(PlayerLoading(event.station));
 
-      final future = _audioPlayer.setUrl(event.station.url);
+      final decryptedUrl = CryptoHelper.decryptText(event.station.url);
+      final future = _audioPlayer.setUrl(decryptedUrl);
+
       await future.timeout(const Duration(seconds: 5), onTimeout: () {
         throw Exception("Timeout en setUrl");
       });
