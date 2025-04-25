@@ -14,9 +14,13 @@ Este proyecto es una app para escuchar estaciones de radio online hecha con Flut
 
 ## 🧪 Tests
 - Hay un test unitario que se encarga de verificar que el sistema de cifrado y descifrado funciona como debe.
+
 Para ejecutarlo:
+
 ```bash
 flutter test
+🧑‍💻 Cómo compilar en tu compu
+Cloná el repo
 
 bash
 Copiar
@@ -73,6 +77,12 @@ Si la URL no es válida, la app muestra un mensaje de error apropiado.
 ⚠️ Pequeño Bug en el Primer onPressed
 Al abrir la app por primera vez, puede haber un pequeño retraso en la interacción con el primer onPressed debido a la inicialización del estado o la carga de recursos. Para solucionar esto, se ha implementado un retraso en la inicialización de la interacción, utilizando Future.delayed() para asegurar que los recursos estén completamente listos antes de permitir que el usuario interactúe con la app.
 
+dart
+Copiar
+Future<void> _delayedInit() async {
+  await Future.delayed(Duration(milliseconds: 500));
+  // Aquí va la lógica de tu primer onPressed
+}
 
 @override
 void initState() {
