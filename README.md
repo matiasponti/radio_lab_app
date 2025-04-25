@@ -14,12 +14,9 @@ Este proyecto es una app para escuchar estaciones de radio online hecha con Flut
 
 ## 🧪 Tests
 - Hay un test unitario que se encarga de verificar que el sistema de cifrado y descifrado funciona como debe.
-
-Para correrlo:
+Para ejecutarlo:
 ```bash
 flutter test
-🧑‍💻 Cómo correrlo en tu compu
-Cloná el repo
 
 bash
 Copiar
