@@ -25,6 +25,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
         emit(PlayerPlaying(event.station, _volume, _sessionId));
         return;
       }
+
       emit(PlayerLoading(event.station));
 
       final future = _audioPlayer.setUrl(event.station.url);

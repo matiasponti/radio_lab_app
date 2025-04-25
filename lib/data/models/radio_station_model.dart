@@ -22,6 +22,17 @@ class RadioStationModel {
       tags: json['tags'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'url_resolved': url,
+      'favicon': favicon,
+      'country': country,
+      'tags': tags,
+    };
+  }
+
   RadioStationModel toEntity() {
     return RadioStationModel(
       name: name,
