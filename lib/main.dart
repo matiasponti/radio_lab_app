@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:radio_lab_app/presentation/app_container.dart';
 import 'package:radio_lab_app/presentation/bloc/favorites_bloc/favorites_bloc.dart';
 import 'package:radio_lab_app/presentation/bloc/favorites_bloc/favorites_event.dart';
 import 'package:radio_lab_app/presentation/bloc/player_bloc/player_bloc.dart';
 import 'package:radio_lab_app/presentation/theme/app_theme.dart';
 import 'injection_container.dart';
 import 'presentation/bloc/radio_list_bloc/radio_list_bloc.dart';
-import 'presentation/pages/radio_home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +30,7 @@ class RadioLabApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Radio Lab App',
         theme: AppTheme.darkTheme,
-        home: const RadioHomePage(),
+        home: const AppContainer(),
       ),
     );
   }
