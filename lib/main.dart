@@ -5,7 +5,6 @@ import 'package:radio_lab_app/presentation/bloc/favorites_bloc/favorites_bloc.da
 import 'package:radio_lab_app/presentation/bloc/favorites_bloc/favorites_event.dart';
 import 'package:radio_lab_app/presentation/bloc/player_bloc/player_bloc.dart';
 import 'package:radio_lab_app/presentation/theme/app_theme.dart';
-import 'package:radio_lab_app/utils/crypto_helper.dart';
 import 'injection_container.dart';
 import 'presentation/bloc/radio_list_bloc/radio_list_bloc.dart';
 
