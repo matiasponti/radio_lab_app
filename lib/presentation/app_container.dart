@@ -9,7 +9,6 @@ class AppContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Navigator para manejar la navegación entre pantallas
         Navigator(
           initialRoute: '/',
           onGenerateRoute: (settings) {

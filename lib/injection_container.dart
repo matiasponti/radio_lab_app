@@ -11,20 +11,15 @@ import 'package:radio_lab_app/presentation/bloc/radio_list_bloc/radio_list_bloc.
 final sl = GetIt.instance;
 
 Future<void> setupLocator() async {
-  // Registro base
   sl.registerLazySingleton(() => http.Client());
 
-  // Data sources
   sl.registerLazySingleton<RadioRemoteDataSource>(
       () => RadioRemoteDataSource(sl()));
 
-  // Repositories
   sl.registerLazySingleton<RadioRepository>(() => RadioRepositoryImpl(sl()));
 
-  // Use Cases
   sl.registerLazySingleton(() => GetStationsUseCase(sl()));
 
-  // Blocs
   sl.registerFactory(() => RadioListBloc(sl()));
   sl.registerFactory(() => PlayerBloc());
   sl.registerFactory(() => FavoritesBloc());
